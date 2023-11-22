@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Shared.Search.Entities\Shared.Search.Entities.csproj" />
-  </ItemGroup>
-
 </Project>
