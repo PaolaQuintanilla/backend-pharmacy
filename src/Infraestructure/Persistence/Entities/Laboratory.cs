@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Persistence.Entities;
-
-public partial class DbLaboratory
+namespace Persistence.Entities
 {
-    public int Id { get; set; }
-
-    public string Name { get; set; } = null!;
+    public partial class DbLaboratory
+    {
+        public Guid Id { get; set; } = Guid.Empty;
+        public string Name { get; set; } = null!;
+    }
 }

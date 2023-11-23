@@ -16,8 +16,9 @@ namespace Persistence.Repositories
         }
         public async Task<Laboratory> AddLaboratory(Laboratory item)
         {
-            DbLaboratory dblaboratory = new DbLaboratory() { Name = item.Name };   
+            DbLaboratory dblaboratory = new DbLaboratory() { Name = item.Name, Id = item.Id  };   
             var result = await this.context.Laboratories.AddAsync(dblaboratory);
+            await this.context.SaveChangesAsync();
 
             return item;
         }
