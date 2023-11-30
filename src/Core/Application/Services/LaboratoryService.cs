@@ -12,20 +12,20 @@ namespace Application.Services
         {
             this.repository = repository;
         }
-        public async Task<Laboratory> AddLaboratory(Laboratory item)
+        public async Task<Laboratory> AddLaboratoryAsync(Laboratory item)
         {
-            return await this.repository.AddLaboratory(item);
+            return await this.repository.AddLaboratoryAsync(item);
         }
 
-        public async Task<PagedList<Laboratory>> GetLaboratories(int current, int pageSize)
+        public async Task<PagedList<Laboratory>> GetLaboratoriesAsync(int current, int pageSize)
         {
-            return await this.repository.GetLaboratories(current, pageSize);
+            return await this.repository.GetLaboratoriesAsync(current, pageSize);
 
         }
 
-        public async Task<Guid> RemoveLaboratory(Guid id)
+        public async Task<Guid> RemoveLaboratoryAsync(Guid id)
         {
-            return await this.repository.RemoveLaboratory(id);
+            return await this.repository.RemoveLaboratoryAsync(id);
         }
     }
 }

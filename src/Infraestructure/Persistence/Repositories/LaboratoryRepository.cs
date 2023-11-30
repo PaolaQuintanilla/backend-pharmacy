@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 using Persistence.Entities;
 using Shared.Search.Entities;
-using System;
 
 namespace Persistence.Repositories
 {
@@ -19,7 +18,7 @@ namespace Persistence.Repositories
             this.context = context;
             this._mapper = mapper;
         }
-        public async Task<Laboratory> AddLaboratory(Laboratory item)
+        public async Task<Laboratory> AddLaboratoryAsync(Laboratory item)
         {
             DbLaboratory dblaboratory = new DbLaboratory() { Name = item.Name, Id = item.Id  };   
             var result = await this.context.Laboratories.AddAsync(dblaboratory);
@@ -28,9 +27,9 @@ namespace Persistence.Repositories
             return item;
         }
 
-        public async Task<PagedList<Laboratory>> GetLaboratories(int page, int pageSize)
+        public async Task<PagedList<Laboratory>> GetLaboratoriesAsync(int page, int pageSize)
         {
-            int total = await getTotal();
+            int total = await getTotalAsync();
             var result = new PagedList<Laboratory>(total, page, pageSize);
             var laboratoryList = await this.context.Laboratories
                 .Skip((page - 1) * (int)pageSize)
@@ -41,12 +40,12 @@ namespace Persistence.Repositories
             return result;
         }
 
-        public async Task<int> getTotal()
+        public async Task<int> getTotalAsync()
         {
             return await this.context.Laboratories.CountAsync();
         }
 
-        public async Task<Guid> RemoveLaboratory(Guid id)
+        public async Task<Guid> RemoveLaboratoryAsync(Guid id)
         {
             var entity = this.context.Laboratories.Single<DbLaboratory>(x => x.Id == id);
             this.context.Remove<DbLaboratory>(entity);

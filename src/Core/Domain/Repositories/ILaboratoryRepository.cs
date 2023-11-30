@@ -5,9 +5,9 @@ namespace Domain.Repositories
 {
     public interface ILaboratoryRepository
     {
-        public Task<Laboratory> AddLaboratory(Laboratory item);
-        public Task<Guid> RemoveLaboratory(Guid id);
-        public Task<PagedList<Laboratory>> GetLaboratories(int current, int pageSize);
-        public Task<int> getTotal();
+        public Task<Laboratory> AddLaboratoryAsync(Laboratory item);
+        public Task<Guid> RemoveLaboratoryAsync(Guid id);
+        public Task<PagedList<Laboratory>> GetLaboratoriesAsync(int current, int pageSize);
+        public Task<int> getTotalAsync();
     }
 }

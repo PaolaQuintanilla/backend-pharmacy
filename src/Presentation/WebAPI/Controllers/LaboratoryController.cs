@@ -23,15 +23,21 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateLaboratory([FromBody] Laboratory laboratoryToCreate)
+        public async Task<IActionResult> CreateLaboratoryAsync([FromBody] Laboratory laboratoryToCreate)
         {
-            return this.Ok(await this.service.AddLaboratory(laboratoryToCreate));
+            return this.Ok(await this.service.AddLaboratoryAsync(laboratoryToCreate));
         }
 
         [HttpGet(Name = "GetLaboratories")]
-        public async Task<IActionResult> Get(int current, int pageSize)
+        public async Task<IActionResult> GetLaboratoriesAsync(int current, int pageSize)
         {   
-            return this.Ok( await this.service.GetLaboratories(current, pageSize));
+            return this.Ok( await this.service.GetLaboratoriesAsync(current, pageSize));
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult<Guid>> DeleteLaboratoryAsync([FromHeader] Guid id)
+        {
+            return this.Ok(await this.service.RemoveLaboratoryAsync(id));
         }
     }
 }
