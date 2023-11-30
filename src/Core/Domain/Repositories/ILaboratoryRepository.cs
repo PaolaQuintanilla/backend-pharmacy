@@ -6,7 +6,8 @@ namespace Domain.Repositories
     public interface ILaboratoryRepository
     {
         public Task<Laboratory> AddLaboratory(Laboratory item);
-        public Task<Laboratory> RemoveLaboratory(Guid id);
-        public Task<IPagedEnumerable<Laboratory>> GetLaboratories();
+        public Task<Guid> RemoveLaboratory(Guid id);
+        public Task<PagedList<Laboratory>> GetLaboratories(int current, int pageSize);
+        public Task<int> getTotal();
     }
 }

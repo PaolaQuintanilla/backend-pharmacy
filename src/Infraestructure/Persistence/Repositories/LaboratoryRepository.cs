@@ -1,18 +1,23 @@
-﻿using Domain.Entities;
+﻿using AutoMapper;
+using Domain.Entities;
 using Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 using Persistence.Entities;
 using Shared.Search.Entities;
+using System;
 
 namespace Persistence.Repositories
 {
     public class LaboratoryRepository : ILaboratoryRepository
     { 
         private readonly PharmacydbContext context;
+        private readonly IMapper _mapper;
 
-        public LaboratoryRepository( PharmacydbContext context )
+        public LaboratoryRepository( PharmacydbContext context, IMapper mapper )
         {
             this.context = context;
+            this._mapper = mapper;
         }
         public async Task<Laboratory> AddLaboratory(Laboratory item)
         {
@@ -23,15 +28,30 @@ namespace Persistence.Repositories
             return item;
         }
 
-        public Task<IPagedEnumerable<Laboratory>> GetLaboratories()
+        public async Task<PagedList<Laboratory>> GetLaboratories(int page, int pageSize)
         {
-            throw new NotImplementedException();
+            int total = await getTotal();
+            var result = new PagedList<Laboratory>(total, page, pageSize);
+            var laboratoryList = await this.context.Laboratories
+                .Skip((page - 1) * (int)pageSize)
+                .Take((int)pageSize)
+                .ToListAsync();
+
+            result.Data = this._mapper.Map<List<Laboratory>>(laboratoryList);
+            return result;
         }
 
-        public Task<Laboratory> RemoveLaboratory(Guid id)
+        public async Task<int> getTotal()
         {
-            //await this.context.Laboratories.Remove()
-            throw new NotImplementedException();
+            return await this.context.Laboratories.CountAsync();
+        }
+
+        public async Task<Guid> RemoveLaboratory(Guid id)
+        {
+            var entity = this.context.Laboratories.Single<DbLaboratory>(x => x.Id == id);
+            this.context.Remove<DbLaboratory>(entity);
+            await this.context.SaveChangesAsync();
+            return id;
         }
     }
 }

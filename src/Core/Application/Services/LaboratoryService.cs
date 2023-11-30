@@ -17,12 +17,13 @@ namespace Application.Services
             return await this.repository.AddLaboratory(item);
         }
 
-        public async Task<IPagedEnumerable<Laboratory>> GetLaboratories()
+        public async Task<PagedList<Laboratory>> GetLaboratories(int current, int pageSize)
         {
-            return await this.repository.GetLaboratories();
+            return await this.repository.GetLaboratories(current, pageSize);
+
         }
 
-        public async Task<Laboratory> RemoveLaboratory(Guid id)
+        public async Task<Guid> RemoveLaboratory(Guid id)
         {
             return await this.repository.RemoveLaboratory(id);
         }

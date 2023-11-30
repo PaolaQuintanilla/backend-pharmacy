@@ -2,6 +2,7 @@
 using Domain.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Search.Entities;
 using System;
 using WebAPI.DataTransferObject;
 
@@ -28,9 +29,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet(Name = "GetLaboratories")]
-        public async Task<IActionResult> Get()
-        {
-            return this.Ok( await this.service.GetLaboratories());
+        public async Task<IActionResult> Get(int current, int pageSize)
+        {   
+            return this.Ok( await this.service.GetLaboratories(current, pageSize));
         }
     }
 }
