@@ -2,6 +2,7 @@
 using Pharmacy.Application.Dtos.Laboratory.Request;
 using Pharmacy.Application.Dtos.Laboratory.Response;
 using Pharmacy.Application.Interfaces;
+using Pharmacy.Infrastructure.Persistences.Interfaces;
 using Pharmacy.Utilities.Search.Entities;
 
 namespace Pharmacy.Application.Services
